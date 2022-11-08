@@ -48,6 +48,7 @@ export default {
         if (s.name == student.name && s.starID == student.starID) {
           return true } // end if
       }) // end updateStudent
+
       if (updateStudent) {
         student.present = present
         this.mostRecentStudent = student
@@ -64,7 +65,8 @@ export default {
       }) // end filter
 
       this.mostRecentStudent = {} // clear welcome/goodbye message when student deleted
-    } // end deleteStudent
+    } // end studentDeleted
+
   } // end methods
 } // end export
 </script>
