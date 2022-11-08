@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "StudentMessage",
+  name: 'StudentMessage',
   props: {
     student: Object
   } // end props

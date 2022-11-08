@@ -15,12 +15,14 @@
             <th>Name</th>
             <th>StarID</th>
             <th>Present?</th>
-           <th v-show="editTable">Delete</th>th>
+           <th v-show="editTable">Delete</th>
+           <!-- had an extra partial html tag in above line, think this was causing the big error -->
          </tr>
 
         <student-row
           v-for="student in students"
-          v-bind:student="student" v-bind:key="student.starID"
+          v-bind:key="student.starID"
+          v-bind:student="student"
           v-bind:edit="editTable"
           v-on:student-arrived-or-left="studentArrivedOrLeft"
           v-on:delete-student="deleteStudent">
@@ -39,8 +41,8 @@ import StudentRow from './StudentRow.vue'
 
 export default {
   name: "StudentTable",
-  emits: ['student-arrived-or-left', 'delete-student'],
   components: {StudentRow},
+  emits: ['student-arrived-or-left', 'delete-student'],
   props: {
     students:Array
   },
@@ -52,9 +54,11 @@ export default {
   }, // end data
 
   methods: {
-    studentArrivedOrLeft(student) {
-      // emit message to parent
-      this.$emit('student-present', student, present)
+    studentArrivedOrLeft(student, present) {
+      // emit message to parent. was missing present param in function header.
+      // console.log("Student Arrived or Left: ", student, present)
+      // student[present]=present
+      this.$emit('student-arrived-or-left', student, present)
     }, // end arrivedOrLeft
     
     deleteStudent(student) {
@@ -64,7 +68,7 @@ export default {
 } // end export
 </script>
 
-<style scoped>
+<style>
 .present {
   color: darkgreen;
   font-style: italic;

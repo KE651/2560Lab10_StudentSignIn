@@ -4,7 +4,9 @@
     <div class="alert alert-primary" v-show="errors.length>0">
       <!-- https://getbootstrap.com/docs/5.1/components/alerts/  -->
       <!-- above link shows bootstrap alert color schemes -->
-      <li v-for="error in errors" v-bind:key="error"> {{error}}</li>
+      <ul>
+        <li v-for="error in errors" v-bind:key="error"> {{error}}</li>
+      </ul>
       <!-- alert alert-danger is from Bootstrap for red/pink colors-->
     </div>
 
@@ -52,9 +54,10 @@ export default {
       if (this.errors.length == 0) {
         let student = {name: this.newStudentName, starID: this.newStarID, present: false}
         this.$emit('student-added', student) // emit to App.vue
+        this.newStudentName = '' // clear form inputs
+        this.newStarID = ''
         } // end if
-      this.newStudentName = '' // clear form inputs
-      this.newStarID = ''
+
     }// end addStudent
   } // end methods
 } // end export
